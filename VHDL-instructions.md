@@ -1,4 +1,4 @@
-#File Creation# 
+File Creation
 1) Inside of VHDL client: New -> VDHL File 
 
 2) Follow quartus instructions for naming and creating a project. ## TOP LEVEL ENTITY DESIGN NAME MUST MATCH ENTITY ##
@@ -10,7 +10,7 @@
 5) Done.
 
 
-#Simulation#
+Simulation
 1) First follow the tabs on the program window File -> New -> Verification/Debugging Files ->
 University Program VWF. This should open a new window named Simulation Waveform
 Editor that looks like Figure 3.
