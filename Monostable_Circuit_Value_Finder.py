@@ -1,5 +1,43 @@
+def suffix(num):
+    suffixes = [' ', 'K', 'M', 'B', 'T', 'P', 'E', 'Z', 'Y']
+    decimal_suffixes = ['', 'm', 'µ', 'n', 'p', 'f', 'a', 'z', 'y']
+    sign = '-' if num < 0 else ''
+    num = abs(num)
+    suffix_idx = 0
+    while num >= 1000.0 and suffix_idx < len(suffixes) - 1:
+        num /= 1000.0
+        suffix_idx += 1
+    if suffix_idx == 0:
+        return f"{sign}{num:.1f}{decimal_suffixes[0]}{suffixes[0]}"
+    decimal_idx = 0
+    while num < 1.0 and decimal_idx < len(decimal_suffixes) - 1:
+        num *= 1000.0
+        decimal_idx += 1
+    return f"{sign}{num:.1f}{decimal_suffixes[decimal_idx]}{suffixes[suffix_idx]}"
+
+def capacsuffix(num):
+    initialnum = num
+    count = 0
+    while num < 1:
+        num = num * 10
+        count += 1
+    if count == 4:
+        return str(num*100) + "u"
+    elif count == 5:
+        return str(num*10) + "u"
+    elif count == 6:
+        return str(num) + "u"
+    elif count == 7:
+        return str(num*100) + "n"
+    elif count == 8:
+        return str(num*10) + "n"
+    elif count == 9:
+        return str(num) + "n"
+    else:
+        return str(initialnum)
+
 def finder():
-    a = open("stdvalue.txt", "r")
+    a = open("C:\\Users\\william.hoffman\\PycharmProjects\\AY23\\testdata.txt", "r")
     error = float(input("Please enter the margin of error you would like to have: "))
     b = a.read()
     a.close()
@@ -62,11 +100,11 @@ def finder():
     for element in standard_capacitor_value_list:
         for element2 in standard_resistor_value_list:
             if isclose((element * element2 * 1.1),desired_input,error) == True:
-                print("\nCapacitor: " + str(element) + "\nResistor: " + str(element2))
+                print("\nCapacitor: " + capacsuffix(element) + " Farads" + "\nResistor: " + str(suffix(element2)) + " Ohms")
 
     booll = False
     while not booll:
-        inu = input("Press 'q' to close, r to restart program")
+        inu = input("\nPress 'q' to close, 'r' to restart program")
         if inu == 'q':
             return 0
         if inu == 'r':
@@ -74,3 +112,4 @@ def finder():
                  return None
 
 finder()
+
